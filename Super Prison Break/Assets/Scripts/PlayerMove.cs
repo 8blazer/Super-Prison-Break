@@ -10,8 +10,8 @@ public class PlayerMove : MonoBehaviour
     public float jumpHeight = 1.0f;
     public bool isOnGround = false;
     public AudioSource jump;
-    public int jumpcount = 1;
-    public int jumptest;
+    int jumpcount = 1;
+    public int jumptest = 1;
     Animator anim;
    // public static int hp;
    // public static int kills;
