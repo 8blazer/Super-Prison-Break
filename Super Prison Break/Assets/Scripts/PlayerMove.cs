@@ -51,10 +51,27 @@ public class PlayerMove : MonoBehaviour
             GetComponent<Transform>().rotation = transfer;
         }
         //if (hp <= 0)
-       // {
+        // {
         //    anim.SetTrigger("death");
         //}
-
+        if (PlayerPrefs.GetString("Size") == "Normal")
+        {
+            moveSpeed = 2.0f;
+            jumpHeight = 1.0f;
+            transform.localScale = new Vector3(.7f, .7f, 1);
+        }
+        else if (PlayerPrefs.GetString("Size") == "Large")
+        {
+            moveSpeed = 1.5f;
+            jumpHeight = 1.5f;
+            transform.localScale = new Vector3(1.4f, 1.4f, 1);
+        }
+        else if (PlayerPrefs.GetString("Size") == "Small")
+        {
+            moveSpeed = 2.5f;
+            jumpHeight = .5f;
+            transform.localScale = new Vector3(.35f, .35f, 1);
+        }
     }
     public void Jump()
     {
