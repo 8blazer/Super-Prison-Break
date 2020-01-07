@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 2.0f;
-    public float jumpHeight = 1.0f;
+    public float moveSpeed = 5.0f;
+    public float jumpHeight = 3.0f;
     public bool isOnGround = false;
     public AudioSource jump;
     int jumpcount = 1;
@@ -56,21 +56,35 @@ public class PlayerMove : MonoBehaviour
         //}
         if (PlayerPrefs.GetString("Size") == "Normal")
         {
-            moveSpeed = 2.0f;
-            jumpHeight = 1.0f;
+            moveSpeed = 5.0f;
+            jumpHeight = 3.0f;
             transform.localScale = new Vector3(.7f, .7f, 1);
+            if (PlayerPrefs.GetFloat("Stamina") < 10)
+            {
+                PlayerPrefs.SetFloat("Stamina", PlayerPrefs.GetFloat("Stamina") + Time.deltaTime);
+            }
         }
         else if (PlayerPrefs.GetString("Size") == "Large")
         {
-            moveSpeed = 1.5f;
-            jumpHeight = 1.5f;
+            moveSpeed = 2.5f;
+            jumpHeight = 4f;
             transform.localScale = new Vector3(1.4f, 1.4f, 1);
+            PlayerPrefs.SetFloat("Stamina", PlayerPrefs.GetFloat("Stamina") - Time.deltaTime);
+            if (PlayerPrefs.GetFloat("Stamina") < .01f)
+            {
+                PlayerPrefs.SetString("Size", "Normal"); 
+            }
         }
         else if (PlayerPrefs.GetString("Size") == "Small")
         {
-            moveSpeed = 2.5f;
-            jumpHeight = .5f;
+            moveSpeed = 8.0f;
+            jumpHeight = 2.0f;
             transform.localScale = new Vector3(.35f, .35f, 1);
+            PlayerPrefs.SetFloat("Stamina", PlayerPrefs.GetFloat("Stamina") - Time.deltaTime);
+            if (PlayerPrefs.GetFloat("Stamina") < .01f)
+            {
+                PlayerPrefs.SetString("Size", "Normal");
+            }
         }
     }
     public void Jump()
